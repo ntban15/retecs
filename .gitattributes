@@ -1,0 +1,4 @@
+DATA/gsdtsr.csv filter=lfs diff=lfs merge=lfs -text
+DATA/iofrol.csv filter=lfs diff=lfs merge=lfs -text
+DATA/paintcontrol.csv filter=lfs diff=lfs merge=lfs -text
+DATA/testShareData.csv.rev.gz filter=lfs diff=lfs merge=lfs -text
