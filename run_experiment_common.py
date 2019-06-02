@@ -73,7 +73,7 @@ import scenarios
 import stats
 
 ITERATIONS = 30
-CI_CYCLES = 1000
+CI_CYCLES = 10
 
 DATA_DIR = 'RESULTS'
 FIGURE_DIR = 'RESULTS'
@@ -142,13 +142,13 @@ def run_experiments(exp_fun, parallel=PARALLEL):
     print('Ran experiments: %d results' % len(avg_res))
 
 
-def exp_run_industrial_datasets(iteration, datasets=['group_01', 'group_03', 'group_06']):
+def exp_run_industrial_datasets(iteration, datasets=['group_01']):
     ags = [
-        lambda: (
-            agents.TableauAgent(histlen=retecs.DEFAULT_HISTORY_LENGTH, learning_rate=retecs.DEFAULT_LEARNING_RATE,
-                                state_size=retecs.DEFAULT_STATE_SIZE,
-                                action_size=retecs.DEFAULT_NO_ACTIONS, epsilon=retecs.DEFAULT_EPSILON),
-            retecs.preprocess_discrete, reward.timerank),
+        # lambda: (
+        #     agents.TableauAgent(histlen=retecs.DEFAULT_HISTORY_LENGTH, learning_rate=retecs.DEFAULT_LEARNING_RATE,
+        #                         state_size=retecs.DEFAULT_STATE_SIZE,
+        #                         action_size=retecs.DEFAULT_NO_ACTIONS, epsilon=retecs.DEFAULT_EPSILON),
+        #     retecs.preprocess_discrete, reward.timerank),
         lambda: (agents.NetworkAgent(histlen=retecs.DEFAULT_HISTORY_LENGTH, state_size=retecs.DEFAULT_STATE_SIZE,
                                      action_size=1,
                                      hidden_size=retecs.DEFAULT_NO_HIDDEN_NODES), retecs.preprocess_continuous,
@@ -156,8 +156,8 @@ def exp_run_industrial_datasets(iteration, datasets=['group_01', 'group_03', 'gr
     ]
 
     reward_funs = {
-        'failcount': reward.failcount,
-        'timerank': reward.timerank,
+        # 'failcount': reward.failcount,
+        # 'timerank': reward.timerank,
         'tcfail': reward.tcfail
     }
 

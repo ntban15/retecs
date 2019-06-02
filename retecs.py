@@ -300,6 +300,9 @@ class PrioLearning(object):
             plot_stats.plot_stats_separate_figures(self.file_prefix, self.stats_file + '.p', self.val_file + '.p', 1,
                                                    plot_graphs=False, save_graphs=save_graphs)
 
+        with open('results.csv', 'a+') as rp:
+            rp.write(str(stats['napfd']) + '\n')
+
         return np.mean(stats['napfd'])
 
 
