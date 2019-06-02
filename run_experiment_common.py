@@ -100,7 +100,12 @@ reward_names = {
 env_names = {
     'paintcontrol': 'ABB Paint Control',
     'iofrol': 'ABB IOF/ROL',
-    'gsdtsr': 'GSDTSR'
+    'gsdtsr': 'GSDTSR',
+    'spectrum': 'SPECTRUM',
+    'group_01': 'GROUP 01',
+    'group_03': 'GROUP 03',
+    'group_06': 'GROUP 06',
+    'group_11': 'GROUP 11',
 }
 
 
@@ -113,6 +118,16 @@ def get_scenario(name):
         sc = scenarios.IndustrialDatasetScenarioProvider(tcfile='DATA/iofrol.csv')
     elif name == 'gsdtsr':
         sc = scenarios.IndustrialDatasetScenarioProvider(tcfile='DATA/gsdtsr.csv')
+    elif name == 'spectrum':
+        sc = scenarios.IndustrialDatasetScenarioProvider(tcfile='DATA/spectrum.csv')
+    elif name == 'group_01':
+        sc = scenarios.IndustrialDatasetScenarioProvider(tcfile='DATA/group_01.csv')
+    elif name == 'group_03':
+        sc = scenarios.IndustrialDatasetScenarioProvider(tcfile='DATA/group_03.csv')
+    elif name == 'group_06':
+        sc = scenarios.IndustrialDatasetScenarioProvider(tcfile='DATA/group_06.csv')
+    elif name == 'group_11':
+        sc = scenarios.IndustrialDatasetScenarioProvider(tcfile='DATA/group_11.csv')
 
     return sc
 
@@ -127,7 +142,7 @@ def run_experiments(exp_fun, parallel=PARALLEL):
     print('Ran experiments: %d results' % len(avg_res))
 
 
-def exp_run_industrial_datasets(iteration, datasets=['paintcontrol', 'iofrol', 'gsdtsr']):
+def exp_run_industrial_datasets(iteration, datasets=['group_01', 'group_03', 'group_06']):
     ags = [
         lambda: (
             agents.TableauAgent(histlen=retecs.DEFAULT_HISTORY_LENGTH, learning_rate=retecs.DEFAULT_LEARNING_RATE,
