@@ -73,7 +73,7 @@ import scenarios
 import stats
 
 ITERATIONS = 30
-CI_CYCLES = 10
+CI_CYCLES = 100
 
 DATA_DIR = 'RESULTS'
 FIGURE_DIR = 'RESULTS'
@@ -106,6 +106,10 @@ env_names = {
     'group_03': 'GROUP 03',
     'group_06': 'GROUP 06',
     'group_11': 'GROUP 11',
+    'mattermost': 'MATTERMOST',
+    'mm1': 'MM_G1',
+    'mm2': 'MM_G2',
+    'mm3': 'MM_G3',
 }
 
 
@@ -128,6 +132,14 @@ def get_scenario(name):
         sc = scenarios.IndustrialDatasetScenarioProvider(tcfile='DATA/group_06.csv')
     elif name == 'group_11':
         sc = scenarios.IndustrialDatasetScenarioProvider(tcfile='DATA/group_11.csv')
+    elif name == 'mattermost':
+        sc = scenarios.IndustrialDatasetScenarioProvider(tcfile='DATA/mattermost.csv')
+    elif name == 'mm1':
+        sc = scenarios.IndustrialDatasetScenarioProvider(tcfile='DATA/mattermost_retecs_in_1.csv')
+    elif name == 'mm2':
+        sc = scenarios.IndustrialDatasetScenarioProvider(tcfile='DATA/mattermost_retecs_in_2.csv')
+    elif name == 'mm3':
+        sc = scenarios.IndustrialDatasetScenarioProvider(tcfile='DATA/mattermost_retecs_in_3.csv')
 
     return sc
 
@@ -142,18 +154,18 @@ def run_experiments(exp_fun, parallel=PARALLEL):
     print('Ran experiments: %d results' % len(avg_res))
 
 
-def exp_run_industrial_datasets(iteration, datasets=['group_01']):
+def exp_run_industrial_datasets(iteration, datasets=['mm3']):
     ags = [
-        # lambda: (
-        #     agents.TableauAgent(histlen=retecs.DEFAULT_HISTORY_LENGTH, learning_rate=retecs.DEFAULT_LEARNING_RATE,
-        #                         state_size=retecs.DEFAULT_STATE_SIZE,
-        #                         action_size=retecs.DEFAULT_NO_ACTIONS, epsilon=retecs.DEFAULT_EPSILON),
-        #     retecs.preprocess_discrete, reward.timerank),
-        lambda: (agents.NetworkAgent(histlen=retecs.DEFAULT_HISTORY_LENGTH, state_size=retecs.DEFAULT_STATE_SIZE,
-                                     action_size=1,
-                                     hidden_size=retecs.DEFAULT_NO_HIDDEN_NODES), retecs.preprocess_continuous,
-                 reward.tcfail)
-    ]
+     #  lambda: (
+     #       agents.TableauAgent(histlen=retecs.DEFAULT_HISTORY_LENGTH, learning_rate=retecs.DEFAULT_LEARNING_RATE,
+     #                           state_size=retecs.DEFAULT_STATE_SIZE,
+     #                           action_size=retecs.DEFAULT_NO_ACTIONS, epsilon=retecs.DEFAULT_EPSILON),
+     #       retecs.preprocess_discrete, reward.timerank),
+          lambda: (agents.NetworkAgent(histlen=retecs.DEFAULT_HISTORY_LENGTH, state_size=retecs.DEFAULT_STATE_SIZE,
+                                       action_size=1,
+                                       hidden_size=retecs.DEFAULT_NO_HIDDEN_NODES), retecs.preprocess_continuous,
+                   reward.tcfail)
+    ] 
 
     reward_funs = {
         # 'failcount': reward.failcount,
